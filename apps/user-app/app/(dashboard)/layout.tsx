@@ -1,4 +1,4 @@
-import { ArrowLeftRight, Clock3, House } from "lucide-react";
+import { ArrowLeftRight, Clock3, House, MoveUpRight } from "lucide-react";
 import Link from "next/link";
 
 
@@ -17,7 +17,12 @@ const navigations = [
         icon: <Clock3 className="text-slate-500 group-hover:text-violet-600" />,
         name: "Transactions",
         path: "/transactions"
-    }
+    },
+    {
+        icon: <MoveUpRight className="text-slate-500 group-hover:text-violet-600" />,
+        name: "P2P Transfer",
+        path: "/p2p-transfer"
+    },
 ]
 
 

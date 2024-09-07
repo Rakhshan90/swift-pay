@@ -1,101 +1,71 @@
 import Heading from '@/components/Heading'
-import { Button } from '@/components/ui/button'
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card"
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import React from 'react'
+import BalanceCard from '@/components/BalanceCard'
+import OnRampTxnsCard from '@/components/OnRampTxnsCard'
+import AddMoneyCard from '@/components/AddMoneyCard'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/app/config/authOptions'
+import db from '@repo/db/client';
 
-const Transfer = () => {
+const getBalance = async () => {
+    const session = await getServerSession(authOptions);
+    if (!session?.user || !session?.user?.id) {
+        return {
+            message: "User is not logged in"
+        }
+    }
+    const balance = await db.balance.findFirst({
+        where: { userId: Number(session?.user?.id) }
+    });
+
+    return {
+        amount: balance?.amount || 0,
+        locked: balance?.locked || 0
+    }
+}
+
+async function getOnRampTransactions() {
+    const session = await getServerSession(authOptions);
+    if (!session?.user || !session?.user?.id) {
+        return {
+            message: "User is not logged in"
+        }
+    }
+    const txns = await db.onRampTransaction.findMany({
+        where: {
+            userId: Number(session?.user?.id)
+        }
+    });
+    return txns.map(t => ({
+        time: t.startTime,
+        amount: t.amount,
+        status: t.status,
+        provider: t.provider
+    }))
+}
+
+const Transfer = async () => {
+
+    const balance = await getBalance();
+    const transactions = await getOnRampTransactions();
+
+    // Check if transactions contain a message
+    if ('message' in transactions) {
+        // Handle the case where the user is not logged in
+        return <div>{transactions.message}</div>;
+    }
+
     return (
         <div className='px-8'>
             <div className="pt-8">
                 <Heading text='Transfer' />
             </div>
             <div className="flex gap-4 py-12 items-start">
-                <Card>
-                    <CardHeader>
-                        <CardTitle className='text-xl border-b-2 pb-2 border-slate-200'>Add Money</CardTitle>
-                    </CardHeader>
-                    <CardContent className='flex flex-col gap-4'>
-                        <div className="flex flex-col gap-2">
-                            <Label>Amount</Label>
-                            <Input className='w-[30rem]' placeholder='Enter amount' />
-                        </div>
-                        <div className="flex flex-col gap-2">
-                            <Label>Bank</Label>
-                            <Select>
-                                <SelectTrigger className="w-[30rem]">
-                                    <SelectValue placeholder="Theme" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="light">HDFC</SelectItem>
-                                    <SelectItem value="dark">SBI</SelectItem>
-                                </SelectContent>
-                            </Select>
-                        </div>
-                    </CardContent>
-                    <CardFooter className='flex items-center justify-center'>
-                        <Button className='bg-violet-600'>Add money</Button>
-                    </CardFooter>
-                </Card>
-
+                <AddMoneyCard />
                 <div className="flex flex-col gap-4">
-                    <Card>
-                        <CardHeader>
-                            <CardTitle className='text-xl border-b-2 pb-2 border-slate-200'>Balance</CardTitle>
-                        </CardHeader>
-
-                        <CardContent>
-                            <div className='w-[30rem]'>
-                                <div className="w-full flex justify-between border-b-2 pb-2 border-slate-200">
-                                    <Label>Unlocked balance</Label>
-                                    <Label>200 INR</Label>
-                                </div>
-                                <div className="mt-2 w-full flex justify-between border-b-2 pb-2 border-slate-200">
-                                    <Label>Total locked balance</Label>
-                                    <Label>0 INR</Label>
-                                </div>
-                                <div className="mt-2 w-full flex justify-between border-b-2 pb-2 border-slate-200">
-                                    <Label>Total balance</Label>
-                                    <Label>200 INR</Label>
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card>
-
-                    <Card>
-                        <CardHeader>
-                            <CardTitle className='text-xl border-b-2 pb-2 border-slate-200'>Recent Transactions</CardTitle>
-                        </CardHeader>
-
-                        <CardContent>
-                            <div className='w-[30rem]'>
-                                <div className="w-full flex justify-between items-center border-b-2 pb-2 border-slate-200">
-                                    <div className="flex flex-col gap-2">
-                                        <Label>Recieved INR</Label>
-                                        <div className="text-slate-600 text-xs font-medium">Sat Mar 30 2024</div>
-                                    </div>
-                                    <Label>+Rs 200</Label>
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card>
+                    <BalanceCard amount={balance.amount ?? 0} locked={balance.locked ?? 0} />
+                    <OnRampTxnsCard transactions={transactions} />
                 </div>
-
             </div>
 
 
