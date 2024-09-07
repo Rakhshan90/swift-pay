@@ -1,0 +1,85 @@
+'use client';
+
+import React, { useState } from 'react'
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card"
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Button } from './ui/button'
+import { onRampCreateTxn } from '@/lib/actions/onRampCreateTxn';
+
+
+const SUPPORTED_BANKS = [{
+    name: "HDFC Bank",
+    redirectUrl: "https://netbanking.hdfcbank.com"
+}, {
+    name: "Axis Bank",
+    redirectUrl: "https://www.axisbank.com/"
+}];
+
+const AddMoneyCard = () => {
+
+    const [amount, setAmount] = useState<number>(0);
+    const [redirectUrl, setRedirectUrl] = useState(SUPPORTED_BANKS[0]?.redirectUrl);
+    const [provider, setProvider] = useState(SUPPORTED_BANKS[0]?.name || '');
+
+    const handleBankChange = (value: string) => {
+        const selectedBank = SUPPORTED_BANKS[parseInt(value)];
+        setProvider(selectedBank?.name || '');
+        setRedirectUrl(selectedBank?.redirectUrl);
+    };
+
+    return (
+        <Card>
+            <CardHeader>
+                <CardTitle className='text-xl border-b-2 pb-2 border-slate-200'>Add Money</CardTitle>
+            </CardHeader>
+            <CardContent className='flex flex-col gap-4'>
+                <div className="flex flex-col gap-2">
+                    <Label>Amount</Label>
+                    <Input
+                        type='number'
+                        className='w-[30rem]'
+                        placeholder='Enter amount'
+                        onChange={(e) => setAmount(Number(e.target.value))} />
+                </div>
+                <div className="flex flex-col gap-2">
+                    <Label>Bank</Label>
+                    <Select onValueChange={handleBankChange}>
+                        <SelectTrigger className="w-[30rem]">
+                            <SelectValue placeholder="HDFC Bank" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {SUPPORTED_BANKS?.map((item, index) => (
+                                <SelectItem key={index} value={index.toString()}>
+                                    {item?.name}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                </div>
+            </CardContent>
+            <CardFooter className='flex items-center justify-center'>
+                <Button onClick={async() => { 
+                    await onRampCreateTxn(amount * 100, provider)
+                    window.location.href = redirectUrl || "";
+                 }} className='bg-violet-600'>Add money</Button>
+            </CardFooter>
+        </Card>
+    )
+}
+
+export default AddMoneyCard

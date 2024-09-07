@@ -1,12 +1,17 @@
+import { getServerSession } from 'next-auth';
+import { redirect } from 'next/navigation';
 import React from 'react'
 
 
 
-export default function Home() {
+export default async function Page() {
 
-  return (
-    <div>
-      Dashboard
-    </div>
-  );
+  const session = await getServerSession();
+
+  if (session?.user) {
+    redirect('/dashboard');
+  }
+  else {
+    redirect('/api/auth/signin');
+  }
 }

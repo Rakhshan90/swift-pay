@@ -8,7 +8,7 @@ app.use(express.json());
 
 app.post('/hdfcWebhook', async(req, res)=>{
 // Todo: Zod validation
-// Todo: Validation to check if the request comming from the hdfc bank server
+// Todo: HDFC or any other bank should ideally send us a secret so we know this is sent by the bank
 
     const paymentInformation: {
         token: string;
@@ -18,6 +18,14 @@ app.post('/hdfcWebhook', async(req, res)=>{
         token: req.body.token,
         userId: req.body.user_identifier,
         amount: req.body.amount,
+    }
+
+    const onRampTransection = await db.onRampTransaction.findFirst({
+        where: {token: paymentInformation?.token}
+    });
+
+    if(onRampTransection?.status === 'Success'){
+        return res.status(403).json({message: "On ramp transaction is already completed"});
     }
 
     try {
