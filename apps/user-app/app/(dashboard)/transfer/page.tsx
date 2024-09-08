@@ -6,6 +6,7 @@ import AddMoneyCard from '@/components/AddMoneyCard'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/config/authOptions'
 import db from '@repo/db/client';
+import { redirect } from 'next/navigation'
 
 const getBalance = async () => {
     const session = await getServerSession(authOptions);
@@ -46,6 +47,10 @@ async function getOnRampTransactions() {
 
 const Transfer = async () => {
 
+    const session = await getServerSession(authOptions);
+
+    
+
     const balance = await getBalance();
     const transactions = await getOnRampTransactions();
 
@@ -53,6 +58,10 @@ const Transfer = async () => {
     if ('message' in transactions) {
         // Handle the case where the user is not logged in
         return <div>{transactions.message}</div>;
+    }
+    
+    if (!session?.user || !session?.user?.id) {
+        redirect('/api/auth/signin');
     }
 
     return (
