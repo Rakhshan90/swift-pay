@@ -1,5 +1,7 @@
 import { ArrowLeftRight, Clock3, House, MoveUpRight } from "lucide-react";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
+import { authOptions } from "../config/authOptions";
 
 
 const navigations = [
@@ -26,7 +28,10 @@ const navigations = [
 ]
 
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default async function Layout({ children }: { children: React.ReactNode }) {
+
+    // const session = await getServerSession(authOptions);
+
     return (
         <div className="flex">
             {/* sidebar item */}

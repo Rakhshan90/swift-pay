@@ -1,37 +1,30 @@
 'use client';
 
 import React from 'react'
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 import { Label } from './ui/label'
 
-type onRampStatus = "Success" | "Failure" | "Processing"
-
-const OnRampTxnsCard = ({ transactions }: { transactions: { time: Date, amount: number, status: onRampStatus, provider: string }[] }) => {
+const RecievedTxnsCard = ({ recievedTxns }: { recievedTxns: { amount: number, timestamp: Date }[] }) => {
     return (
         <Card>
             <CardHeader>
-                <CardTitle className='text-xl border-b-2 pb-2 border-slate-200'>Recent Transactions</CardTitle>
+                <CardTitle className='text-xl border-b-2 pb-2 border-slate-200'>
+                    Recieved Transactions
+                </CardTitle>
             </CardHeader>
 
             <CardContent>
                 <div className='w-[30rem]'>
                     <div className="flex flex-col gap-4 border-b-2 pb-2 border-slate-200">
-                        {transactions?.map((item, index) => (
-                            <div className='w-full flex justify-between'>
+                        {recievedTxns?.map((item, index) => (
+                            <div key={index} className='w-full flex justify-between'>
                                 <div className="flex flex-col">
                                     <Label>Recieved INR</Label>
                                     <div className="text-slate-600 text-xs font-medium">
-                                        {item?.time?.toDateString()}
+                                        {item?.timestamp?.toDateString()}
                                     </div>
                                 </div>
-                                <Label>+Rs {item?.amount / 100} {item?.status}</Label>
+                                <Label>+Rs {item?.amount / 100}</Label>
                             </div>
                         ))}
                     </div>
@@ -41,4 +34,4 @@ const OnRampTxnsCard = ({ transactions }: { transactions: { time: Date, amount: 
     )
 }
 
-export default OnRampTxnsCard
+export default RecievedTxnsCard

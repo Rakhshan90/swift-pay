@@ -5,18 +5,18 @@ import { RecoilRoot } from "recoil";
 import { SessionProvider } from "next-auth/react"
 
 
-export const StateProvider = ({children}: {children: React.ReactNode}) => {
+export const StateProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <RecoilRoot>
-        {children}
+      {children}
     </RecoilRoot>
   )
 }
 
-export const NextProvider = ({children}: {children: React.ReactNode}) => {
+export const NextProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <SessionProvider>
-        {children}
+      {children}
     </SessionProvider>
   )
 }
