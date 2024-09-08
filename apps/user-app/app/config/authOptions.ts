@@ -1,6 +1,6 @@
 import CredentialsProvider from "next-auth/providers/credentials"
-import GitHubProvider from "next-auth/providers/github";
-import GoogleProvider from "next-auth/providers/google";
+// import GitHubProvider from "next-auth/providers/github";
+// import GoogleProvider from "next-auth/providers/google";
 import bcrpyt from 'bcrypt';
 import db from '@repo/db/client';
 
@@ -52,14 +52,14 @@ export const authOptions = {
                 return null;
             }
         }),
-        GoogleProvider({
-            clientId: process.env.GOOGLE_ID || "",
-            clientSecret: process.env.GOOGLE_SECRET || ""
-        }),
-        GitHubProvider({
-            clientId: process.env.GITHUB_ID || "",
-            clientSecret: process.env.GITHUB_SECRET || "",
-        })
+        // GoogleProvider({
+        //     clientId: process.env.GOOGLE_ID || "",
+        //     clientSecret: process.env.GOOGLE_SECRET || ""
+        // }),
+        // GitHubProvider({
+        //     clientId: process.env.GITHUB_ID || "",
+        //     clientSecret: process.env.GITHUB_SECRET || "",
+        // })
     ],
     secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
