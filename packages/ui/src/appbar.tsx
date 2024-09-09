@@ -3,6 +3,7 @@
 import React from 'react'
 import { Button } from './button';
 
+
 const Appbar = ({ signInHandler, signOutHandler, authenticated, navigateHandler, landingPage }: { signInHandler: () => void, signOutHandler: () => void, authenticated: boolean, navigateHandler: ()=> void, landingPage: ()=> void }) => {
     
 
