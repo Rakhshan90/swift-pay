@@ -49,7 +49,7 @@ const Transfer = async () => {
 
     const session = await getServerSession(authOptions);
 
-    
+
 
     const balance = await getBalance();
     const transactions = await getOnRampTransactions();
@@ -59,17 +59,17 @@ const Transfer = async () => {
         // Handle the case where the user is not logged in
         return <div>{transactions.message}</div>;
     }
-    
+
     if (!session?.user || !session?.user?.id) {
         redirect('/api/auth/signin');
     }
 
     return (
-        <div className='px-8'>
+        <div className='px-8 max-w-7xl mx-auto xl:mx-0'>
             <div className="pt-8">
                 <Heading text='Transfer' />
             </div>
-            <div className="flex gap-4 py-12 items-start">
+            <div className="flex flex-col gap-4 py-12 items-start md:flex-row">
                 <AddMoneyCard />
                 <div className="flex flex-col gap-4">
                     <BalanceCard amount={balance.amount ?? 0} locked={balance.locked ?? 0} />

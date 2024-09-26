@@ -13,9 +13,9 @@ const P2PTransfer = async() => {
         redirect('/api/auth/signin');
     }
     return (
-        <div className='px-8'>
+        <div className='px-8 max-w-7xl mx-auto xl:mx-0'>
             <div className="pt-8">
-                <Heading text='Transfer money to your friend' />
+                <Heading text='P2P Transfer' />
             </div>
             <div className="flex gap-4 py-12 items-start">
                 {/* <AddMoneyCard /> */}

@@ -3,6 +3,7 @@ import React from 'react';
 import Appbar from '@repo/ui/appbar';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { Wallet } from 'lucide-react';
 
 const AppbarClient = () => {
 
@@ -20,8 +21,10 @@ const AppbarClient = () => {
         router.push('/');
     }
 
+    const wallet = <Wallet className="h-6 w-6" />
+
     return (
-        <Appbar authenticated={authenticated} signInHandler={signIn} signOutHandler={signOut} 
+        <Appbar wallet={wallet} authenticated={authenticated} signInHandler={signIn} signOutHandler={signOut} 
         navigateHandler={navigateHandler} landingPage={landingPage} />
     )
 }

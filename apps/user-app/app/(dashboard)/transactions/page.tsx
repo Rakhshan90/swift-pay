@@ -47,11 +47,11 @@ const Transactions = async () => {
   }
 
   return (
-    <div className='px-8'>
+    <div className='px-8 max-w-7xl mx-auto xl:mx-0'>
       <div className="pt-8">
         <Heading text='P2P transactions' />
       </div>
-      <div className="flex gap-4 py-12 items-start">
+      <div className="flex flex-col gap-4 py-12 items-start md:flex-row">
         {/* <AddMoneyCard /> */}
         <SendTransactionsCard sendTxns={sendTxns} />
         <RecievedTxnsCard recievedTxns={recievedTxns} />

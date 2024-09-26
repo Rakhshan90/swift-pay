@@ -2,6 +2,7 @@ import { ArrowLeftRight, Clock3, House, MoveUpRight } from "lucide-react";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { authOptions } from "../config/authOptions";
+import ToggleSidebar from "@repo/ui/toggle-sidebar";
 
 
 const navigations = [
@@ -35,7 +36,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
     return (
         <div className="flex">
             {/* sidebar item */}
-            <div className="w-72 min-h-screen pt-28 px-8 border-r-2 border-slate-200">
+            {/* <div className="w-72 min-h-screen pt-28 px-8 border-r-2 border-slate-200">
                 <div className="flex flex-col gap-4 justify-start">
                     {navigations?.map((item, index) => (
                         <Link href={item?.path} key={index} className="flex gap-2 group">
@@ -44,7 +45,10 @@ export default async function Layout({ children }: { children: React.ReactNode }
                         </Link>
                     ))}
                 </div>
-            </div>
+            </div> */}
+            <ToggleSidebar navigations={navigations} />
+
+            
             {/* render children item */}
             {children}
         </div>

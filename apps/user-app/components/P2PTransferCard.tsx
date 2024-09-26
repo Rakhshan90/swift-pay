@@ -30,7 +30,7 @@ const P2PTransferCard = () => {
     }
 
     return (
-        <Card>
+        <Card className='w-80 lg:w-96'>
             <CardHeader>
                 <CardTitle className='text-xl border-b-2 pb-2 border-slate-200'>Send money 
                     {msg? (
@@ -43,7 +43,6 @@ const P2PTransferCard = () => {
                     <Label>Number</Label>
                     <Input
                         type='string'
-                        className='w-[30rem]'
                         placeholder='Enter phone number'
                         onChange={(e) => setNumber(e.target.value)} />
                 </div>
@@ -51,7 +50,6 @@ const P2PTransferCard = () => {
                     <Label>Amount</Label>
                     <Input
                         type='number'
-                        className='w-[30rem]'
                         placeholder='Enter amount'
                         onChange={(e) => setAmount(Number(e.target.value))} />
                 </div>

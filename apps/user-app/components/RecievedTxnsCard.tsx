@@ -6,7 +6,7 @@ import { Label } from './ui/label'
 
 const RecievedTxnsCard = ({ recievedTxns }: { recievedTxns: { amount: number, timestamp: Date }[] }) => {
     return (
-        <Card>
+        <Card className='w-80 lg:w-96'>
             <CardHeader>
                 <CardTitle className='text-xl border-b-2 pb-2 border-slate-200'>
                     Recieved Transactions
@@ -14,7 +14,7 @@ const RecievedTxnsCard = ({ recievedTxns }: { recievedTxns: { amount: number, ti
             </CardHeader>
 
             <CardContent>
-                <div className='w-[30rem]'>
+                <div className='w-full'>
                     <div className="flex flex-col gap-4 border-b-2 pb-2 border-slate-200">
                         {recievedTxns?.map((item, index) => (
                             <div key={index} className='w-full flex justify-between'>

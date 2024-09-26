@@ -3,6 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
+    "./toggle-sidebar": "./src/toggle-sidebar.tsx",
+    "./loader": "./src/loader-bar.tsx",
     "./button": "./src/button.tsx",
     "./card": "./src/card.tsx",
     "./code": "./src/code.tsx",

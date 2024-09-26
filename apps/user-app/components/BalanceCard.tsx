@@ -14,7 +14,7 @@ import { Label } from './ui/label'
 
 const BalanceCard = ({ amount, locked }: { amount: number, locked: number }) => {
     return (
-        <Card>
+        <Card className='w-80 lg:w-96'>
             <CardHeader>
                 <CardTitle className='text-xl border-b-2 pb-2 border-slate-200'>
                     Balance
@@ -22,7 +22,7 @@ const BalanceCard = ({ amount, locked }: { amount: number, locked: number }) => 
             </CardHeader>
 
             <CardContent>
-                <div className='w-[30rem]'>
+                <div className='w-full'>
                     <div className="w-full flex justify-between border-b-2 pb-2 border-slate-200">
                         <Label>Unlocked balance</Label>
                         <Label>{amount / 100} INR</Label>

@@ -9,7 +9,7 @@ import { Label } from './ui/label'
 const SendTransactionsCard = ({ sendTxns }: { sendTxns: { amount: number, timestamp: Date }[] }) => {
 
     return (
-        <Card>
+        <Card className='w-80 lg:w-96'>
             <CardHeader>
                 <CardTitle className='text-xl border-b-2 pb-2 border-slate-200'>
                     Send Transactions
@@ -17,7 +17,7 @@ const SendTransactionsCard = ({ sendTxns }: { sendTxns: { amount: number, timest
             </CardHeader>
 
             <CardContent>
-                <div className='w-[30rem]'>
+                <div className='w-full'>
                     <div className="flex flex-col gap-4 border-b-2 pb-2 border-slate-200">
                         {sendTxns?.map((item, index) => (
                             <div key={index} className='w-full flex justify-between'>
@@ -27,7 +27,7 @@ const SendTransactionsCard = ({ sendTxns }: { sendTxns: { amount: number, timest
                                         {item?.timestamp?.toDateString()}
                                     </div>
                                 </div>
-                                <Label>+Rs {item?.amount / 100}</Label>
+                                <Label>-Rs {item?.amount / 100}</Label>
                             </div>
                         ))}
                     </div>

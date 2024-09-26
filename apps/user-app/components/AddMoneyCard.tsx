@@ -43,7 +43,7 @@ const AddMoneyCard = () => {
     };
 
     return (
-        <Card>
+        <Card className='w-80 lg:w-96'>
             <CardHeader>
                 <CardTitle className='text-xl border-b-2 pb-2 border-slate-200'>Add Money</CardTitle>
             </CardHeader>
@@ -52,14 +52,14 @@ const AddMoneyCard = () => {
                     <Label>Amount</Label>
                     <Input
                         type='number'
-                        className='w-[30rem]'
+                        className=''
                         placeholder='Enter amount'
                         onChange={(e) => setAmount(Number(e.target.value))} />
                 </div>
                 <div className="flex flex-col gap-2">
                     <Label>Bank</Label>
                     <Select onValueChange={handleBankChange}>
-                        <SelectTrigger className="w-[30rem]">
+                        <SelectTrigger className="">
                             <SelectValue placeholder="HDFC Bank" />
                         </SelectTrigger>
                         <SelectContent>

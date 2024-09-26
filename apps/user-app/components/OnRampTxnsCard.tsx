@@ -15,13 +15,13 @@ type onRampStatus = "Success" | "Failure" | "Processing"
 
 const OnRampTxnsCard = ({ transactions }: { transactions: { time: Date, amount: number, status: onRampStatus, provider: string }[] }) => {
     return (
-        <Card>
+        <Card className='w-80 lg:w-96'>
             <CardHeader>
                 <CardTitle className='text-xl border-b-2 pb-2 border-slate-200'>Recent Transactions</CardTitle>
             </CardHeader>
 
             <CardContent>
-                <div className='w-[30rem]'>
+                <div className='w-full'>
                     <div className="flex flex-col gap-4 border-b-2 pb-2 border-slate-200">
                         {transactions?.map((item, index) => (
                             <div className='w-full flex justify-between'>
