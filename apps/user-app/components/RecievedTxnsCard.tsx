@@ -14,7 +14,7 @@ const RecievedTxnsCard = ({ recievedTxns }: { recievedTxns: { amount: number, ti
             </CardHeader>
 
             <CardContent>
-                <div className='w-full'>
+                <div className='h-24 w-full overflow-y-auto'>
                     <div className="flex flex-col gap-4 border-b-2 pb-2 border-slate-200">
                         {recievedTxns?.map((item, index) => (
                             <div key={index} className='w-full flex justify-between'>

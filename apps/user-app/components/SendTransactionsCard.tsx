@@ -17,7 +17,7 @@ const SendTransactionsCard = ({ sendTxns }: { sendTxns: { amount: number, timest
             </CardHeader>
 
             <CardContent>
-                <div className='w-full'>
+                <div className='h-24 w-full overflow-y-auto'>
                     <div className="flex flex-col gap-4 border-b-2 pb-2 border-slate-200">
                         {sendTxns?.map((item, index) => (
                             <div key={index} className='w-full flex justify-between'>

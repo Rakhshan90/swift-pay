@@ -4,21 +4,19 @@ import React from 'react'
 import {
     Card,
     CardContent,
-    CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
 import { Label } from './ui/label'
 
-type onRampStatus = "Success" | "Failure" | "Processing"
+type offRampStatus = "Success" | "Failure" | "Processing"
 
-const OnRampTxnsCard = ({ transactions }: { transactions: { time: Date, amount: number, status: onRampStatus, provider: string }[] }) => {
+const OffRampTxnsCard = ({ transactions }: { transactions: { time: Date, amount: number, status: offRampStatus, provider: string }[] }) => {
     return (
         <Card className='w-80 lg:w-96'>
             <CardHeader>
                 <CardTitle className='text-xl border-b-2 pb-2 border-slate-200'>
-                    Add money transactions    
+                    Withdraw transactions    
                 </CardTitle>
             </CardHeader>
 
@@ -43,4 +41,4 @@ const OnRampTxnsCard = ({ transactions }: { transactions: { time: Date, amount: 
     )
 }
 
-export default OnRampTxnsCard
+export default OffRampTxnsCard

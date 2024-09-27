@@ -6,6 +6,8 @@ import { authOptions } from '@/app/config/authOptions';
 import SendTransactionsCard from '@/components/SendTransactionsCard';
 import RecievedTxnsCard from '@/components/RecievedTxnsCard';
 import { redirect } from 'next/navigation';
+import OnRampTxnsCard from '@/components/OnRampTxnsCard';
+import OffRampTxnsCard from '@/components/offRampTxnsCard';
 
 
 const getSendTxns = async () => {
@@ -34,11 +36,64 @@ const getRecievedTxns = async () => {
   return recievedTxns;
 }
 
+async function getOnRampTransactions() {
+  const session = await getServerSession(authOptions);
+  if (!session?.user || !session?.user?.id) {
+      return {
+          message: "User is not logged in"
+      }
+  }
+  const txns = await db.onRampTransaction.findMany({
+      where: {
+          userId: Number(session?.user?.id)
+      }
+  });
+  return txns.map(t => ({
+      time: t.startTime,
+      amount: t.amount,
+      status: t.status,
+      provider: t.provider
+  }))
+}
+
+async function getOffRampTransactions() {
+  const session = await getServerSession(authOptions);
+  if (!session?.user || !session?.user?.id) {
+      return {
+          message: "User is not logged in"
+      }
+  }
+  const txns = await db.offRampTransaction.findMany({
+      where: {
+          userId: Number(session?.user?.id)
+      }
+  });
+  return txns.map(t => ({
+      time: t.startTime,
+      amount: t.amount,
+      status: t.status,
+      provider: t.provider
+  }))
+}
+
 const Transactions = async () => {
 
   const sendTxns = await getSendTxns();
   const recievedTxns = await getRecievedTxns();
+  const onRamptransactions = await getOnRampTransactions();
+  const offRamptransactions = await getOffRampTransactions();
 
+    // Check if transactions contain a message
+    if ('message' in onRamptransactions) {
+        // Handle the case where the user is not logged in
+        return <div>{onRamptransactions.message}</div>;
+    }
+
+    // Check if transactions contain a message
+    if ('message' in offRamptransactions) {
+        // Handle the case where the user is not logged in
+        return <div>{offRamptransactions.message}</div>;
+    }
 
   const session = await getServerSession(authOptions);
 
@@ -49,12 +104,13 @@ const Transactions = async () => {
   return (
     <div className='px-8 max-w-7xl mx-auto xl:mx-0'>
       <div className="pt-8">
-        <Heading text='P2P transactions' />
+        <Heading text='Transactions' />
       </div>
-      <div className="flex flex-col gap-4 py-12 items-start md:flex-row">
-        {/* <AddMoneyCard /> */}
+      <div className="flex flex-wrap gap-4 py-12 justify-center items-center xl:justify-start xl:items-start md:flex-row">
         <SendTransactionsCard sendTxns={sendTxns} />
         <RecievedTxnsCard recievedTxns={recievedTxns} />
+        <OnRampTxnsCard transactions={onRamptransactions} />
+        <OffRampTxnsCard transactions={offRamptransactions} />
       </div>
 
 

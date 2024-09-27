@@ -1,12 +1,11 @@
 import Heading from '@/components/Heading'
 import React from 'react'
 import BalanceCard from '@/components/BalanceCard'
-import OnRampTxnsCard from '@/components/OnRampTxnsCard'
-import AddMoneyCard from '@/components/AddMoneyCard'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/config/authOptions'
 import db from '@repo/db/client';
 import { redirect } from 'next/navigation'
+import { WithdrawCreditTabs } from '@/components/WithdrawCreditTabs'
 
 const getBalance = async () => {
     const session = await getServerSession(authOptions);
@@ -69,12 +68,9 @@ const Transfer = async () => {
             <div className="pt-8">
                 <Heading text='Transfer' />
             </div>
-            <div className="flex flex-col gap-4 py-12 items-start md:flex-row">
-                <AddMoneyCard />
-                <div className="flex flex-col gap-4">
-                    <BalanceCard amount={balance.amount ?? 0} locked={balance.locked ?? 0} />
-                    <OnRampTxnsCard transactions={transactions} />
-                </div>
+            <div className="flex flex-wrap gap-4 py-12 justify-center items-center xl:justify-start xl:items-start md:flex-row">
+                <WithdrawCreditTabs />
+                <BalanceCard amount={balance.amount ?? 0} locked={balance.locked ?? 0} />
             </div>
 
 

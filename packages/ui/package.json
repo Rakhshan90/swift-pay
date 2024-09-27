@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
+    "./withdraw": "./src/withdraw.tsx",
     "./toggle-sidebar": "./src/toggle-sidebar.tsx",
     "./loader": "./src/loader-bar.tsx",
     "./button": "./src/button.tsx",
