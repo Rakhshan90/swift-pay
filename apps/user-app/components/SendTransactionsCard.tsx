@@ -12,7 +12,7 @@ const SendTransactionsCard = ({ sendTxns }: { sendTxns: { amount: number, timest
         <Card className='w-80 lg:w-96'>
             <CardHeader>
                 <CardTitle className='text-xl border-b-2 pb-2 border-slate-200'>
-                    Send Transactions
+                    Debited Transactions
                 </CardTitle>
             </CardHeader>
 
@@ -22,7 +22,7 @@ const SendTransactionsCard = ({ sendTxns }: { sendTxns: { amount: number, timest
                         {sendTxns?.map((item, index) => (
                             <div key={index} className='w-full flex justify-between'>
                                 <div className="flex flex-col">
-                                    <Label>Recieved INR</Label>
+                                    <Label>Debited INR</Label>
                                     <div className="text-slate-600 text-xs font-medium">
                                         {item?.timestamp?.toDateString()}
                                     </div>
