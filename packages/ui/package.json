@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
+    "./footer": "./src/footer.tsx",
+    "./feature": "./src/feature.tsx",
+    "./landing": "./src/landing.tsx",
     "./withdraw": "./src/withdraw.tsx",
     "./toggle-sidebar": "./src/toggle-sidebar.tsx",
     "./loader": "./src/loader-bar.tsx",

@@ -18,11 +18,8 @@ const P2PTransfer = async() => {
                 <Heading text='P2P Transfer' />
             </div>
             <div className="flex gap-4 py-12 items-start">
-                {/* <AddMoneyCard /> */}
                 <P2PTransferCard />
             </div>
-
-
         </div>
     )
 }

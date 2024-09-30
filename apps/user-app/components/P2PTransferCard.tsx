@@ -13,29 +13,32 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from './ui/button'
 import { p2pTransfer } from '@/lib/actions/p2pTransfer';
+import { useRouter } from 'next/navigation';
+import CircularRingLoader from './ui/circular-ring-loader';
 
 const P2PTransferCard = () => {
 
     const [number, setNumber] = useState("");
     const [amount, setAmount] = useState<number>(0);
-    const [msg, setMsg] = useState("");
+    const [loading, setLoading] = useState<Boolean>(false);
+    const router = useRouter();
 
     const clickHandler = async () => {
         try {
-            const res = await p2pTransfer(number, amount * 100)
-            setMsg(res.message);
+            setLoading(true);
+            await p2pTransfer(number, amount * 100)
+            setLoading(false);
+            router.push('/transactions')
         } catch (error: any) {
-            setMsg("Promise rejected");
+            console.log('Error while transfer, please try again');
         }
     }
 
     return (
         <Card className='w-80 lg:w-96'>
             <CardHeader>
-                <CardTitle className='text-xl border-b-2 pb-2 border-slate-200'>Send money 
-                    {msg? (
-                        <span className='ml-2 text-red-600 font-semibold text-xl'>{msg}</span>
-                    ): null}
+                <CardTitle className='text-xl border-b-2 pb-2 border-slate-200'>
+                    Send money 
                 </CardTitle>
             </CardHeader>
             <CardContent className='flex flex-col gap-4'>
@@ -55,7 +58,10 @@ const P2PTransferCard = () => {
                 </div>
             </CardContent>
             <CardFooter className='flex items-center justify-center'>
-                <Button onClick={clickHandler} className='bg-violet-600'>Send money</Button>
+                <Button onClick={clickHandler} className='bg-violet-600'>
+                    {loading? 'Processing...' : 'Send money'}
+                    {loading && <CircularRingLoader className='w-4 h-4 ml-2' />}
+                </Button>
             </CardFooter>
         </Card>
     )

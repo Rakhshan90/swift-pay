@@ -9,7 +9,7 @@ const RecievedTxnsCard = ({ recievedTxns }: { recievedTxns: { amount: number, ti
         <Card className='w-80 lg:w-96'>
             <CardHeader>
                 <CardTitle className='text-xl border-b-2 pb-2 border-slate-200'>
-                    Recieved Transactions
+                    Credited Transactions
                 </CardTitle>
             </CardHeader>
 
@@ -19,7 +19,7 @@ const RecievedTxnsCard = ({ recievedTxns }: { recievedTxns: { amount: number, ti
                         {recievedTxns?.map((item, index) => (
                             <div key={index} className='w-full flex justify-between'>
                                 <div className="flex flex-col">
-                                    <Label>Recieved INR</Label>
+                                    <Label>Credited INR</Label>
                                     <div className="text-slate-600 text-xs font-medium">
                                         {item?.timestamp?.toDateString()}
                                     </div>

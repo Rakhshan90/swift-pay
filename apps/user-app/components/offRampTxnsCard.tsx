@@ -26,12 +26,12 @@ const OffRampTxnsCard = ({ transactions }: { transactions: { time: Date, amount:
                         {transactions?.map((item, index) => (
                             <div key={index} className='w-full flex justify-between'>
                                 <div className="flex flex-col">
-                                    <Label>Recieved INR</Label>
+                                    <Label>Debited INR</Label>
                                     <div className="text-slate-600 text-xs font-medium">
                                         {item?.time?.toDateString()}
                                     </div>
                                 </div>
-                                <Label>+Rs {item?.amount / 100} {item?.status}</Label>
+                                <Label>-Rs {item?.amount / 100} {item?.status}</Label>
                             </div>
                         ))}
                     </div>
