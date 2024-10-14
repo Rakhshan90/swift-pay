@@ -39,4 +39,4 @@ jobs:
           sudo docker pull rakhshan007/swift-pay-user-app:latest
           sudo docker stop swift-pay-user-app || true
           sudo docker rm swift-pay-user-app || true
-          sudo docker run -d -e DATABASE_URL=${{ secrets.DATABASE_URL }} -e NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} --name swift-pay-user-app -p 3008:3000 rakhshan007/swift-pay-user-app:latest
+          sudo docker run -d -e DATABASE_URL=${{ secrets.DATABASE_URL }} -e NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} --name swift-pay-user-app -p 3008:3000 rakhshan007/swift-pay-user-app:latest 
