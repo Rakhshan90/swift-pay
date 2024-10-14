@@ -24,44 +24,13 @@ const getBalance = async () => {
     }
 }
 
-async function getOnRampTransactions() {
-    const session = await getServerSession(authOptions);
-    if (!session?.user || !session?.user?.id) {
-        return {
-            message: "User is not logged in"
-        }
-    }
-    const txns = await db.onRampTransaction.findMany({
-        where: {
-            userId: Number(session?.user?.id)
-        }
-    });
-    return txns.map(t => ({
-        time: t.startTime,
-        amount: t.amount,
-        status: t.status,
-        provider: t.provider
-    }))
-}
-
 const Transfer = async () => {
 
     const session = await getServerSession(authOptions);
-
-
-
-    const balance = await getBalance();
-    const transactions = await getOnRampTransactions();
-
-    // Check if transactions contain a message
-    if ('message' in transactions) {
-        // Handle the case where the user is not logged in
-        return <div>{transactions.message}</div>;
-    }
-
     if (!session?.user || !session?.user?.id) {
         redirect('/api/auth/signin');
     }
+    const balance = await getBalance();
 
     return (
         <div className='px-8 max-w-7xl mx-auto xl:mx-0'>
@@ -72,8 +41,6 @@ const Transfer = async () => {
                 <WithdrawCreditTabs />
                 <BalanceCard amount={balance.amount ?? 0} locked={balance.locked ?? 0} />
             </div>
-
-
         </div>
     )
 }

@@ -11,12 +11,13 @@ An end-to-end wallet using Next, Postgres, Prisma, Express, Node, Turbo, Bcrypt,
 - [Environment Variables](#environment-variables)
 - [Usage](#usage)
 - [Deployment](#deployment)
+- [Screenshots](#screenshots)
 
 ## Live Link
 
 
 ```bash
-https://workstream.rakhshan.online/
+https://swiftpay.rakhshan.online/
 ```
 
 ## Features
@@ -89,4 +90,10 @@ yarn run start-user-app
 
 This project is deployed on AWS using Docker and Github workflows to automate the CI and CD workflow.
 
+## Screenshots
 
+![alt text](image.png)
+
+![alt text](image-1.png)
+
+![alt text](image-2.png)

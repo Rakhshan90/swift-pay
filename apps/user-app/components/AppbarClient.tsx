@@ -13,7 +13,7 @@ const AppbarClient = () => {
 
     const navigateHandler = ()=>{
         if(authenticated){
-            router.push('/dashboard');
+            router.push('/transfer');
         }
     }
 

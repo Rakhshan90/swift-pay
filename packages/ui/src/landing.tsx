@@ -1,7 +1,8 @@
-import { Button } from "./button";
-
+'use client';
 
 export const Landing = ({ children }: { children: React.ReactNode }) => {
+  
+
   return (
     <div className="w-full flex justify-center items-center xl:justify-between px-4">
       {/* item 1 */}
@@ -13,9 +14,6 @@ export const Landing = ({ children }: { children: React.ReactNode }) => {
           <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
             Your all-in-one INR wallet solution for seamless on-ramp, off-ramp, and peer-to-peer transactions.
           </p>
-        </div>
-        <div className="space-x-4">
-          <Button onClick={() => console.log("hi")}>Get Started</Button>
         </div>
       </div>
 

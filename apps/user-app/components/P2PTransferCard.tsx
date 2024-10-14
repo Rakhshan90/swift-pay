@@ -13,24 +13,30 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from './ui/button'
 import { p2pTransfer } from '@/lib/actions/p2pTransfer';
-import { useRouter } from 'next/navigation';
 import CircularRingLoader from './ui/circular-ring-loader';
+import { useToast } from '@/hooks/use-toast';
 
 const P2PTransferCard = () => {
 
     const [number, setNumber] = useState("");
     const [amount, setAmount] = useState<number>(0);
     const [loading, setLoading] = useState<Boolean>(false);
-    const router = useRouter();
+    const {toast} = useToast();
 
     const clickHandler = async () => {
         try {
             setLoading(true);
-            await p2pTransfer(number, amount * 100)
+            const res = await p2pTransfer(number, amount * 100)
             setLoading(false);
-            router.push('/transactions')
-        } catch (error: any) {
-            console.log('Error while transfer, please try again');
+            toast({
+                title: 'Response',
+                description: res.message
+            });
+        } catch (error) {
+            toast({
+                title: 'Error',
+                description: 'Failed to transfer, try again'
+            })
         }
     }
 

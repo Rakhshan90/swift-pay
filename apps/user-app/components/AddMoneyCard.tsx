@@ -45,7 +45,9 @@ const AddMoneyCard = () => {
     return (
         <Card className='w-80 lg:w-96'>
             <CardHeader>
-                <CardTitle className='text-xl border-b-2 pb-2 border-slate-200'>Add Money</CardTitle>
+                <CardTitle className='text-xl border-b-2 pb-2 border-slate-200'>
+                    Add Money
+                </CardTitle>
             </CardHeader>
             <CardContent className='flex flex-col gap-4'>
                 <div className="flex flex-col gap-2">

@@ -6,11 +6,11 @@ import ToggleSidebar from "@repo/ui/toggle-sidebar";
 
 
 const navigations = [
-    {
-        icon: <House className="text-slate-500 group-hover:text-violet-600" />,
-        name: "Dashboard",
-        path: "/dashboard"
-    },
+    // {
+    //     icon: <House className="text-slate-500 group-hover:text-violet-600" />,
+    //     name: "Dashboard",
+    //     path: "/dashboard"
+    // },
     {
         icon: <ArrowLeftRight className="text-slate-500 group-hover:text-violet-600" />,
         name: "Transfer",
