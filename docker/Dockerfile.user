@@ -4,14 +4,17 @@ WORKDIR /user/src/app
 
 COPY package.json package-lock.json turbo.json ./
 
-COPY apps ./apps
+COPY apps/user-app ./apps/user-app
 COPY packages ./packages
 
-RUN yarn install
+# Install dependencies only for the target app using Turbo's `--filter` flag
+# This installs only the dependencies needed for the user-app.
+RUN yarn install --filter ./apps/user-app...
 
 RUN yarn run db:generate
 
-RUN yarn run build
+# Build only the target app using Turbo's `--filter` flag
+RUN yarn run build --filter ./apps/user-app...
 
 CMD ["yarn", "run", "start-user-app"]
 
