@@ -3,6 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials"
 // import GoogleProvider from "next-auth/providers/google";
 import bcrpyt from 'bcrypt';
 import db from '@repo/db/client';
+import { signIn } from "next-auth/react";
 
 export const authOptions = {
     providers: [
@@ -69,5 +70,8 @@ export const authOptions = {
             }
             return session;
         }
+    },
+    pages: {
+        signIn: '/signin',
     }
 }

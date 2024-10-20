@@ -11,21 +11,27 @@ const AppbarClient = () => {
     const session = useSession();
     const authenticated = session.status === 'authenticated';
 
-    const navigateHandler = ()=>{
-        if(authenticated){
+    const navigateHandler = () => {
+        if (authenticated) {
             router.push('/transfer');
         }
     }
 
-    const landingPage = ()=>{
+    const landingPage = () => {
         router.push('/');
     }
 
+    const signOutHandler = () => {
+        signOut({
+            redirect: false,
+        });
+        router.push('/')
+    }
     const wallet = <Wallet className="h-6 w-6" />
 
     return (
-        <Appbar wallet={wallet} authenticated={authenticated} signInHandler={signIn} signOutHandler={signOut} 
-        navigateHandler={navigateHandler} landingPage={landingPage} />
+        <Appbar wallet={wallet} authenticated={authenticated} signInHandler={signIn} signOutHandler={signOutHandler}
+            navigateHandler={navigateHandler} landingPage={landingPage} />
     )
 }
 
